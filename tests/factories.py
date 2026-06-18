@@ -19,7 +19,8 @@ Test Factory to make fake objects for testing
 """
 # tests/factories.py
 import factory
-from factory.fuzzy import FuzzyChoice, FuzzyFloat
+from factory.fuzzy import FuzzyChoice, FuzzyDecimal
+from decimal import Decimal
 from service.models import Product, Category
 
 class ProductFactory(factory.Factory):
@@ -29,6 +30,6 @@ class ProductFactory(factory.Factory):
     id = factory.Sequence(lambda n: n)
     name = factory.Faker("word")
     description = factory.Faker("text")
-    price = FuzzyFloat(0.5, 2000.0)
+    price = FuzzyDecimal(Decimal("0.5"), Decimal("2000.0"))
     available = FuzzyChoice(choices=[True, False])
     category = FuzzyChoice(choices=[c for c in Category])

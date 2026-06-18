@@ -121,7 +121,7 @@ class TestProductModel(unittest.TestCase):
         self.assertEqual(found_product.available, product.available)
         self.assertEqual(found_product.category, product.category)
 
-        def test_update_a_product(self):
+    def test_update_a_product(self):
         """It should Update a Product"""
         product = ProductFactory()
         logging.info(f"Testing updating product: {product}")

@@ -121,4 +121,26 @@ class TestProductModel(unittest.TestCase):
         self.assertEqual(found_product.available, product.available)
         self.assertEqual(found_product.category, product.category)
 
+        def test_update_a_product(self):
+        """It should Update a Product"""
+        product = ProductFactory()
+        logging.info(f"Testing updating product: {product}")
+        product.id = None
+        product.create()
+        logging.info(f"Created product: {product}")
+        self.assertIsNotNone(product.id)
         
+        # Update the product
+        original_id = product.id
+        product.description = "testing update"
+        product.update()
+        
+        # Fetch it back and make sure the id hasn't changed but the data did
+        self.assertEqual(product.id, original_id)
+        self.assertEqual(product.description, "testing update")
+        
+        # Fetch all products to ensure there is still only one
+        products = Product.all()
+        self.assertEqual(len(products), 1)
+        self.assertEqual(products[0].id, original_id)
+        self.assertEqual(products[0].description, "testing update")
